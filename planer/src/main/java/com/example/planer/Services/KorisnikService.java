@@ -5,6 +5,7 @@ import com.example.planer.Models.Korisnik;
 import com.example.planer.Repositories.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
@@ -21,6 +22,16 @@ public class KorisnikService {
 
         if(korisnikRepository.existsByEmail(korisnik.getEmail())){
             throw new RuntimeException("Korisnik sa istom email adresom vec postoji");
+        }
+
+        if(!korisnik.podudaranjeLozinki()){
+            throw new RuntimeException("Lozinke se ne podudaraju");
+        }else{
+
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            korisnik.setLozinka(encoder.encode(korisnik.getLozinka()));
+            korisnik.setPotvrdaLozinke(encoder.encode(korisnik.getPotvrdaLozinke()));
+
         }
 
         return korisnikRepository.save(korisnik);

@@ -69,5 +69,6 @@ public class TerminService {
 
         return terminRepository.save(termin);
     }
-    
+
+
 }
