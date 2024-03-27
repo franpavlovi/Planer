@@ -1,14 +1,13 @@
 package com.example.planer.Models;
 
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;;
-import jakarta.persistence.Id;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 public class Korisnik {
@@ -32,6 +31,12 @@ public class Korisnik {
     @Email(message = "Polje email je obavezno.")
     private String email;
 
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    Set<Role> roles = new HashSet<>();
+
+
     public Korisnik(){
     }
 
@@ -42,6 +47,8 @@ public class Korisnik {
         this.lozinka=lozinka;
         this.potvrdaLozinke=potvrdaLozinke;
         this.email=email;
+        this.roles = new HashSet<>();
+        this.roles.add(Role.KORISNIK);
     }
 
     public Long getId() {
@@ -92,6 +99,8 @@ public class Korisnik {
         this.email = email;
     }
 
+
+
     @AssertTrue(message = "Lozinke se moraju podudarati")
     public boolean podudaranjeLozinki(){
 
@@ -101,5 +110,19 @@ public class Korisnik {
             return false;
         }
     }
+
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }
 

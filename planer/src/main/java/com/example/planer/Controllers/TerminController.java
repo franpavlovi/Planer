@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/termini")
+@RequestMapping("/termini")
 public class TerminController {
 
     @Autowired

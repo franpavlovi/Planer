@@ -2,6 +2,7 @@ package com.example.planer.Services;
 
 
 import com.example.planer.Models.Korisnik;
+import com.example.planer.Models.Role;
 import com.example.planer.Repositories.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -9,8 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class KorisnikService {
@@ -30,17 +33,52 @@ public class KorisnikService {
 
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             korisnik.setLozinka(encoder.encode(korisnik.getLozinka()));
-            korisnik.setPotvrdaLozinke(encoder.encode(korisnik.getPotvrdaLozinke()));
+
+            Set<Role> roles = korisnik.getRoles();
+            if (roles == null || roles.isEmpty()) {
+                roles = new HashSet<>();
+                roles.add(Role.KORISNIK);
+                korisnik.setRoles(roles);
+            }
 
         }
 
         return korisnikRepository.save(korisnik);
     }
 
+
     public void loginKorisnik(String email, String lozinka) {
+
         Korisnik korisnik = korisnikRepository.findByEmail(email);
-        if (korisnik == null || !korisnik.getLozinka().equals(lozinka)) {
+
+        if (korisnik == null) {
             throw new RuntimeException("Neuspješna prijava. Provjerite e-mail adresu i lozinku.");
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(lozinka, korisnik.getLozinka())) {
+            throw new RuntimeException("Neuspješna prijava. Provjerite e-mail adresu i lozinku.");
+        }
+    }
+
+
+    public void admin(){
+
+        Korisnik admin = new Korisnik();
+        admin.setIme("admin");
+        admin.setPrezime("admin");
+        admin.setEmail("admin@admin.com");
+        admin.setLozinka("admin123");
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.ADMIN);
+        admin.setRoles(roles);
+        Korisnik existingAdmin = korisnikRepository.findByEmail("admin@admin.com");
+
+        if(existingAdmin == null){
+            this.registerKorisnik(admin);
+        }else {
+            System.out.println("Admin već postoji.");
         }
 
     }
