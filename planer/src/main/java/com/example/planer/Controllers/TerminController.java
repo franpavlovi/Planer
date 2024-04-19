@@ -4,14 +4,11 @@ import com.example.planer.Models.Termin;
 import com.example.planer.Models.Zadatak;
 import com.example.planer.Services.TerminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -27,17 +24,7 @@ public class TerminController {
         return ResponseEntity.ok(termini);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Termin> getTerminById(@PathVariable Long id) {
-        Termin termin = terminService.getTerminById(id);
-        if (termin != null) {
-            return ResponseEntity.ok(termin);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping
+    @PostMapping("/dodaj")
     public ResponseEntity<Termin> createTermin(@RequestBody Termin termin) {
         try {
             Termin createdTermin = terminService.createTermin(termin);
@@ -47,6 +34,15 @@ public class TerminController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Termin> getTerminById(@PathVariable Long id) {
+        Termin termin = terminService.getTerminById(id);
+        if (termin != null) {
+            return ResponseEntity.ok(termin);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Termin> updateTermin(@PathVariable Long id, @RequestBody Termin termin) {

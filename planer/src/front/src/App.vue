@@ -6,6 +6,7 @@
     <router-link to="/auth/registracija">Registracija</router-link>
     <router-link to="/termini">Termini</router-link>
     <router-link to="/zadaci">Zadaci</router-link>
+    <router-link to="/termini/dodaj">Dodaj termin</router-link>
   </nav>
   <router-view/>
 </template>

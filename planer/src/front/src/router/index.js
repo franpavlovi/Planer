@@ -5,6 +5,7 @@ import RegistracijaView from '../views/RegistracijaView.vue'
 import NotFoundView from "../views/NotFoundView.vue";
 import TerminiView from "../views/TerminiView.vue";
 import ZadaciView from "../views/ZadaciView.vue"
+import DodajTerminView from "@/views/DodajTerminView.vue";
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path:'/zadaci',
     name: 'zadaci',
     component: ZadaciView
+  },
+  {
+    path:'/termini/dodaj',
+    name:'dodajtermin',
+    component: DodajTerminView,
   }
 ]
 

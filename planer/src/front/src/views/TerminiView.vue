@@ -3,7 +3,7 @@
 
   <table>
     <tr>
-      <td>
+      <td @click="dodajterminview">
         <h3>DODAJ TERMIN</h3>
       </td>
     </tr>
@@ -21,10 +21,19 @@
     </tr>
   </table>
 
+
 </template>
 
 <script>
+import router from '../router';
 
+export default {
+  methods: {
+    dodajterminview(){
+      router.push('/termini/dodaj')
+    }
+  }
+}
 
 </script>
 
