@@ -53,6 +53,7 @@ public class TerminService {
         return terminRepository.save(termin);
     }
 
+
     public void deleteTermin(Long id){
         terminRepository.deleteById(id);
     }
