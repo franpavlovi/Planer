@@ -21,14 +21,7 @@ public class SecurityConfig {
 
         http
                 .authorizeRequests()
-                .requestMatchers("/auth/registracija", "/auth/prijava").permitAll()
-                .requestMatchers("/korisnici").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/auth/prijava")
-                .successHandler(myAuthenticationSuccessHandler())
-                .permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .csrf().disable();
 

@@ -54,7 +54,7 @@ public class TerminService {
     }
 
     public void deleteTermin(Long id){
-         terminRepository.deleteById(id);
+        terminRepository.deleteById(id);
     }
 
     public Termin updateTermin(Long id, Termin noviTermin) {
