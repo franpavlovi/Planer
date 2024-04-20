@@ -114,6 +114,7 @@ export default {
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .submit-button {

@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .zadatak-section {
   display: flex;
   justify-content: center;
@@ -133,6 +133,7 @@ export default {
   border-radius: 8px;
   background: #fafafa;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -160,3 +161,5 @@ export default {
 }
 
 </style>
+
+
