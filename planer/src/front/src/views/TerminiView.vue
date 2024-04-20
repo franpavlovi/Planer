@@ -9,7 +9,7 @@
     </tr>
 
     <tr>
-      <td>
+      <td @click="zadaciview">
         <h3>VIDI ZADATKE</h3>
       </td>
     </tr>
@@ -31,19 +31,21 @@ export default {
   methods: {
     dodajterminview(){
       router.push('/termini/dodaj')
+    },
+    zadaciview(){
+      router.push('/zadaci')
     }
   }
 }
 
 </script>
 
-<style>
-
+<style scoped>
 td {
   text-align: center;
   background-color: #f8f8f8;
   border: 1px solid black;
-  padding:10px;
+  padding: 10px;
   border-radius: 40px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
@@ -60,5 +62,4 @@ table {
   border-collapse: separate;
   border-spacing: 0 25px;
 }
-
 </style>

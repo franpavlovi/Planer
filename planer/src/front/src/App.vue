@@ -7,6 +7,7 @@
     <router-link to="/termini">Termini</router-link>
     <router-link to="/zadaci">Zadaci</router-link>
     <router-link to="/termini/dodaj">Dodaj termin</router-link>
+    <router-link to="/zadaci/dodaj">Dodaj zadatak</router-link>
   </nav>
   <router-view/>
 </template>

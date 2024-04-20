@@ -1,5 +1,5 @@
 <template>
-  <section class="zadatak-section">
+  <section class="termin-section">
   <div class="container">
     <div class="card">
       <div class="card-body">

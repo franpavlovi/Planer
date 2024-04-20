@@ -41,7 +41,7 @@ public class ZadatakController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/dodaj")
     public ResponseEntity<Zadatak> createZadatak(@RequestBody Zadatak zadatak){
 
         try {
