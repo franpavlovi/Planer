@@ -4,19 +4,13 @@
   <table>
     <tr>
       <td @click="dodajterminview">
-        <h3>DODAJ TERMIN</h3>
+        DODAJ TERMIN
       </td>
     </tr>
 
     <tr>
       <td @click="zadaciview">
-        <h3>VIDI ZADATKE</h3>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <h3>VIDI PRODUKTIVNOST</h3>
+        VIDI ZADATKE
       </td>
     </tr>
   </table>
@@ -49,6 +43,7 @@ td {
   border-radius: 40px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
+
 }
 
 td:hover {

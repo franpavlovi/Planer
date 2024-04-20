@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-.zadatak-section {
+.termin-section {
   display: flex;
   justify-content: center;
   align-items: center;
