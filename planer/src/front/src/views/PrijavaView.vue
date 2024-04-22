@@ -48,13 +48,13 @@ export default {
   },
   methods: {
     prijava() {
-      axios.post('/auth/prijava', this.korisnik)
+      axios.post('/api/auth/prijava', this.korisnik)
           .then(response => {
-            alert(response.data);
+            alert("Uspjesna registracija" + response.data);
             router.push('/termini');
           })
           .catch(error => {
-            alert(error.response.data)
+            alert( "Greska" + error.response.data)
           });
     }
   }

@@ -1,14 +1,10 @@
 package com.example.planer.Controllers;
 
-import com.example.planer.Models.Termin;
 import com.example.planer.Models.Zadatak;
 import com.example.planer.Services.ZadatakService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/zadaci")
+@RequestMapping("/api/zadaci")
 public class ZadatakController {
 
     @Autowired

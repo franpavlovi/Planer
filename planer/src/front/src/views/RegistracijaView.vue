@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     registracija() {
-      axios.post('/auth/registracija', this.korisnik)
+      axios.post('/api/auth/registracija', this.korisnik)
           .then(response => {
             alert(response.data);
             router.push('/auth/prijava');

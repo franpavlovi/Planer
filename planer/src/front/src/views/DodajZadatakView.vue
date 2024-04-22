@@ -53,7 +53,7 @@ export default {
   methods:{
     kreirajZadatak(){
 
-      axios.post('/zadaci/dodaj', this.zadatak)
+      axios.post('/api/zadaci/dodaj', this.zadatak)
           .then(response =>{
 
             alert("Uspjesno kreiran termin" + response.data)

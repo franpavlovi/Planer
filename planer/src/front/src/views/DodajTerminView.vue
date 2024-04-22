@@ -71,7 +71,7 @@ export default {
       this.termin.pocetak = pocetakISOformat;
       this.termin.kraj = krajISOformat;
 
-      axios.post('/termini/dodaj', this.termin)
+      axios.post('/api/termini/dodaj', this.termin)
           .then(response => {
             alert("Uspjesno kreiran termin" + response.data);
             router.push('/termini');
