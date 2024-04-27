@@ -10,6 +10,7 @@
     <router-link to="/zadaci/dodaj">Dodaj zadatak</router-link>
   </nav>
   <router-view/>
+
 </template>
 
 <style>
@@ -39,4 +40,5 @@ nav a.router-link-exact-active {
 }
 </style>
 <script setup>
+
 </script>
