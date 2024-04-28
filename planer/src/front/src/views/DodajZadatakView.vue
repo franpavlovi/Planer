@@ -1,4 +1,5 @@
 <template>
+  <NavigacijaGlava/>
   <section class="zadatak-section">
     <div class="container">
       <div class="card">
@@ -35,10 +36,15 @@
 </template>
 
 <script>
+import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import axios from 'axios';
 import router from '../router';
 
+
 export default {
+
+  name:'App',
+  components:{NavigacijaGlava},
 
   data(){
     return{

@@ -1,4 +1,5 @@
 <template>
+  <NavigacijaGlava/>
   <header><h1>TERMINI</h1></header>
 
   <table>
@@ -7,28 +8,26 @@
         DODAJ TERMIN
       </td>
     </tr>
-
-    <tr>
-      <td @click="zadaciview">
-        VIDI ZADATKE
-      </td>
-    </tr>
   </table>
 
 
 </template>
 
 <script>
+import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import router from '../router';
 
+
 export default {
+
+  name:'App',
+  components:{NavigacijaGlava},
+
   methods: {
     dodajterminview(){
       router.push('/termini/dodaj')
     },
-    zadaciview(){
-      router.push('/zadaci')
-    }
+
   }
 }
 

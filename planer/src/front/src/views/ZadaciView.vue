@@ -1,34 +1,28 @@
 <template>
+  <NavigacijaGlava/>
   <h1>Zadaci</h1>
   <table>
     <tr>
       <td @click="dodajzadatakview">
         DODAJ ZADATAK
       </td>
-
-    </tr>
-
-    <tr>
-      <td @click="statistikaview">
-        VIDI STATISTIKU
-      </td>
     </tr>
   </table>
 </template>
 
 <script>
-
+import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import router from "@/router";
 
 export default {
+  name:'App',
+  components:{NavigacijaGlava},
 
   methods:{
     dodajzadatakview(){
       router.push('/zadaci/dodaj')
     },
-    statistikaview(){
-      router.push('/statistika')
-    }
+
   }
 }
 

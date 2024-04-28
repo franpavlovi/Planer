@@ -50,11 +50,11 @@ export default {
     prijava() {
       axios.post('/api/auth/prijava', this.korisnik)
           .then(response => {
-            alert("Uspjesna registracija" + response.data);
+            alert(response.data);
             router.push('/termini');
           })
           .catch(error => {
-            alert( "Greska" + error.response.data)
+            alert(error.response.data)
           });
     }
   }

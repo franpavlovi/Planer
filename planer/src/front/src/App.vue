@@ -1,22 +1,18 @@
 <template>
+<v-app class="grey lighten-4">
 
-
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-    <router-link to="/auth/prijava">Prijava</router-link>
-    <router-link to="/auth/registracija">Registracija</router-link>
-    <router-link to="/termini">Termini</router-link>
-    <router-link to="/zadaci">Zadaci</router-link>
-    <router-link to="/termini/dodaj">Dodaj termin</router-link>
-    <router-link to="/zadaci/dodaj">Dodaj zadatak</router-link>
-    <router-link to="/statistika">Statistika</router-link>
-  </nav>
   <router-view/>
 
-
+</v-app>
 
 </template>
+
+<script>
+
+export default {
+
+}
+</script>
 
 <style>
 #app {
