@@ -1,5 +1,5 @@
 <template>
-<h1>Zadaci</h1>
+  <h1>Zadaci</h1>
   <table>
     <tr>
       <td @click="dodajzadatakview">
@@ -9,7 +9,7 @@
     </tr>
 
     <tr>
-      <td>
+      <td @click="statistikaview">
         VIDI STATISTIKU
       </td>
     </tr>
@@ -25,6 +25,9 @@ export default {
   methods:{
     dodajzadatakview(){
       router.push('/zadaci/dodaj')
+    },
+    statistikaview(){
+      router.push('/statistika')
     }
   }
 }
@@ -55,5 +58,4 @@ table {
   border-spacing: 0 25px;
 }
 </style>
-
 

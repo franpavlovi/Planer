@@ -1,4 +1,6 @@
 <template>
+
+
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -8,8 +10,11 @@
     <router-link to="/zadaci">Zadaci</router-link>
     <router-link to="/termini/dodaj">Dodaj termin</router-link>
     <router-link to="/zadaci/dodaj">Dodaj zadatak</router-link>
+    <router-link to="/statistika">Statistika</router-link>
   </nav>
   <router-view/>
+
+
 
 </template>
 

@@ -7,6 +7,7 @@ import TerminiView from "../views/TerminiView.vue";
 import ZadaciView from "../views/ZadaciView.vue"
 import DodajTerminView from "@/views/DodajTerminView.vue";
 import DodajZadatakView from "@/views/DodajZadatakView.vue";
+import StatistikaView from "@/views/StatistikaView.vue"
 
 const routes = [
   {
@@ -53,6 +54,11 @@ const routes = [
     path:'/zadaci/dodaj',
     name:'dodajzadatak',
     component: DodajZadatakView
+  },
+  {
+    path:'/statistika',
+    name: 'statistika',
+    component: StatistikaView
   }
 ]
 
