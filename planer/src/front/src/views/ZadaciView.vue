@@ -1,13 +1,14 @@
 <template>
+  <v-app>
   <NavigacijaGlava/>
-  <h1>Zadaci</h1>
-  <table>
-    <tr>
-      <td @click="dodajzadatakview">
-        DODAJ ZADATAK
-      </td>
-    </tr>
-  </table>
+
+
+    <div class="dodaj-zadatak">
+    <v-btn flat size="large" rounded="0" class="zadaci-btn" @click="dodajzadatakview">DODAJ ZADATAK</v-btn>
+    <hr class="underline">
+    </div>
+
+  </v-app>
 </template>
 
 <script>
@@ -29,27 +30,23 @@ export default {
 </script>
 
 <style scoped>
-td {
-  text-align: center;
-  background-color: #f8f8f8;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 40px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-  transition: background-color 0.3s, color 0.3s, transform 0.3s;
-
+.zadaci-btn{
+  background-color: #f5f5f5 !important;
+  color: black !important;
+  text-transform: uppercase;
 }
 
-td:hover {
-  background-color: #6495ED;
-  color: #ffffff;
-  transform: scale(1.05);
+.dodaj-zadatak {
+  text-align: left;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
-table {
-  padding-left: 30px;
-  border-collapse: separate;
-  border-spacing: 0 25px;
+.underline {
+  border: none;
+  border-top: 1px solid black;
 }
+
+
 </style>
 
