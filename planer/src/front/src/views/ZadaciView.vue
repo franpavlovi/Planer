@@ -51,6 +51,7 @@ export default {
     },
 
     izlistajZadatke() {
+
       axios.get('/api/zadaci')
           .then(response => {
             this.zadaci = response.data;
