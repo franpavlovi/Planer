@@ -8,19 +8,24 @@
     </div>
 
     <div class="lista-zadataka">
-      <v-card>
-        <v-card-title>LISTA ZADATAKA</v-card-title>
-        <v-card-item v-for="zadatak in zadaci" :key="zadatak.id">
-          Naziv zadatka:{{ zadatak.naziv }}
-          <br>
-          Opis zadatka: {{ zadatak.opis }}
-          <br>
-          Status zadatka: {{ zadatak.status }}
-          <br>
-          Datum završetka: {{ zadatak.dt }}
-          <br><br>
-        </v-card-item>
-      </v-card>
+      <v-container>
+        <v-row v-for="dan in dani" :key="dan.index">
+          <strong>{{ dan.naziv}}</strong>
+          <v-col>
+            <v-card>
+              <v-card-item v-for="zadatak in zadaci" :key="zadatak.id">
+                Naziv zadatka:{{ zadatak.naziv }}
+                <br>
+                Opis zadatka: {{ zadatak.opis }}
+                <br>
+                Status zadatka: {{ zadatak.status }}
+                <br>
+                Datum završetka: {{ zadatak.dt }}
+              </v-card-item>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
 
   </v-app>
@@ -37,11 +42,21 @@ export default {
 
   data() {
     return {
-      zadaci: []
-    };
+      zadaci: [],
+      dani: [
+        {index:0, naziv:'PONEDJELJAK'},
+        {index:1, naziv:'UTORAK'},
+        {index:2, naziv:'SRIJEDA'},
+        {index:3, naziv:'ČETVRTAK'},
+        {index:4, naziv:'PETAK'},
+        {index:5, naziv:'SUBOTA'},
+        {index:6, naziv:'NEDJELJA'}
+      ],
+    }
   },
 
   mounted() {
+    this.dohvatiPocetakTjedna();
     this.izlistajZadatke();
   },
 
@@ -50,9 +65,31 @@ export default {
       router.push('/zadaci/dodaj');
     },
 
+    dohvatiPocetakTjedna() {
+
+      const danas = new Date();
+
+      const danUSedmici = danas.getDay();
+      const daniProtekli = (7 + danUSedmici - 1) % 7;
+
+      const pocetakTjedna = new Date(danas);
+      pocetakTjedna.setDate(danas.getDate() - daniProtekli);
+
+      const pocetakTjednaFormatiran = pocetakTjedna.toISOString().split('T')[0];
+
+
+      this.pocetakTjedna = pocetakTjednaFormatiran;
+    },
+
     izlistajZadatke() {
 
-      axios.get('/api/zadaci')
+      this.dohvatiPocetakTjedna();
+
+      axios.get('/api/zadaci/tjedan', {
+        params: {
+          pocetakTjedna: this.pocetakTjedna
+        }
+      })
           .then(response => {
             this.zadaci = response.data;
           })
