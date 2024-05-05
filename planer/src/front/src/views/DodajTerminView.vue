@@ -1,48 +1,36 @@
 <template>
   <NavigacijaGlava/>
-  <section class="termin-section">
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <div class="form-container">
-          <h1 class="text-center">Unesi podatke</h1>
-          <form @submit.prevent="kreirajTermin" class="forma">
 
-           <div class="form-group">
-             <label for="datum">Datum</label>
-             <input id="datum" v-model="termin.datum" type="text" placeholder="year-month-day" required>
-           </div>
+  <v-form @submit.prevent="kreirajTermin" class="obrub">
+    <v-container class="forma">
 
-            <div class="form-group">
-              <label for="naziv">Naziv</label>
-              <input id="naziv" v-model="termin.naziv" type="text" required>
-            </div>
+      <v-container class="inputi">
 
-            <div class="form-group">
-              <label for="lokacija">Lokacija</label>
-              <input id="lokacija" v-model="termin.lokacija" type="text" required>
-            </div>
+        <h1 class="text-left">DODAJ TERMIN</h1>
+        <v-divider class="v-divider"></v-divider>
 
-            <div class="form-group">
-              <label for="pocetak">Pocetak</label>
-              <input id="pocetak" v-model="termin.pocetak" type="time" required>
-            </div>
+        <p class="text-left">NAZIV</p>
+        <v-text-field v-model="termin.naziv" label="unesite naziv" variant="outlined"></v-text-field>
 
-            <div class="form-group">
-              <label for="kraj">Kraj</label>
-              <input id="kraj" v-model="termin.kraj" type="time" required>
-            </div>
+        <p class="text-left">LOKACIJA</p>
+        <v-text-field v-model="termin.lokacija" label="unesite lokaciju" variant="outlined"></v-text-field>
 
-            <div class="form-group">
-              <button type="submit" class="submit-button">Dodaj termin</button>
-            </div>
+        <p class="text-left">DATUM</p>
+        <v-text-field v-model="termin.datum" label="unesite datum" variant="outlined" type="date"></v-text-field>
 
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  </section>
+        <p class="text-left">POCETAK</p>
+        <v-text-field v-model="termin.pocetak" label="unesite pocetak" variant="outlined" type="time"></v-text-field>
+
+        <p class="text-left">KRAJ</p>
+        <v-text-field v-model="termin.kraj" label="unesite kraj" variant="outlined" type="time"></v-text-field>
+
+
+        <v-btn size="x-large" class="mt-2" color="success" type="submit" block>DODAJ</v-btn>
+      </v-container>
+
+    </v-container>
+  </v-form>
+
 </template>
 
 
@@ -91,39 +79,26 @@ export default {
 </script>
 
 <style scoped>
-.termin-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f9;
+.obrub{
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+  width: 800px;
+  margin: auto;
 }
 
-.container {
-  width: 90%;
-  max-width: 500px;
+.obrub:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  overflow: hidden;
+.inputi p {
+  margin-bottom: 8px;
 }
 
-.card-body {
-  padding: 2rem;
-}
-
-.text-center {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-weight: 300;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
+.v-divider {
+  margin-bottom: 28px;
 }
 
 .form-group label {
@@ -145,25 +120,6 @@ export default {
 .form-group input:focus {
   border-color: #0056b3;
   background: #fff;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-  background-color: #0056b3;
-}
-
-.card-body {
-  padding: 1rem;
 }
 
 </style>

@@ -1,38 +1,30 @@
 <template>
   <NavigacijaGlava/>
-  <section class="zadatak-section">
-    <div class="container">
-      <div class="card">
-        <div class="card-body">
-          <div class="form-container">
-            <h1 class="text-center">Unesi podatke</h1>
-            <form @submit.prevent="kreirajZadatak" class="forma">
 
-              <div class="form-group">
-                <label for="naziv">Naziv</label>
-                <input id="naziv" v-model="zadatak.naziv" type="text" placeholder="Unesite naziv">
-              </div>
+  <v-form @submit.prevent="kreirajZadatak" class="obrub">
+    <v-container class="forma">
 
-              <div class="form-group">
-                <label for="opis">Opis</label>
-                <input id="opis" v-model="zadatak.opis" type="text" placeholder="Unesite opis">
-              </div>
+      <v-container class="inputi">
 
-              <div class="form-group">
-                <label for="dt">Vrijeme i datum</label>
-                <input id="dt" v-model="zadatak.dt" type="text" placeholder="Unesite u formatu yyyy-mm-ddT00:00:00">
-              </div>
+        <h1 class="text-left">DODAJ ZADATAK</h1>
+        <v-divider class="v-divider"></v-divider>
 
-              <div class="form-group">
-                <button type="submit" class="submit-button">Dodaj zadatak</button>
-              </div>
+        <p class="text-left">NAZIV</p>
+        <v-text-field v-model="zadatak.naziv" label="unesite naziv" variant="outlined"></v-text-field>
 
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <p class="text-left">OPIS</p>
+        <v-text-field v-model="zadatak.opis" label="unesite opis" variant="outlined"></v-text-field>
+
+        <p class="text-left">DATUM</p>
+        <v-text-field v-model="zadatak.dt" label="unesite datum" variant="outlined" type="datetime-local"></v-text-field>
+
+
+        <v-btn size="x-large" class="mt-2" color="success" type="submit" block>DODAJ</v-btn>
+      </v-container>
+
+    </v-container>
+  </v-form>
+
 </template>
 
 <script>
@@ -48,6 +40,7 @@ export default {
 
   data(){
     return{
+
       zadatak: {
         naziv:'',
         opis:'',
@@ -76,79 +69,25 @@ export default {
 </script>
 
 <style scoped>
-.zadatak-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f9;
-}
-
-.container {
-  width: 90%;
-  max-width: 500px;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-.text-center {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-weight: 300;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #606060;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
+.obrub{
+  border: 2px solid #ccc;
   border-radius: 8px;
-  background: #fafafa;
-  transition: border-color 0.3s;
-  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+  width: 800px;
+  margin: auto;
 }
 
-.form-group input:focus {
-  border-color: #0056b3;
-  background: #fff;
+.obrub:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.submit-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.inputi p {
+  margin-bottom: 8px;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.v-divider {
+  margin-bottom: 28px;
 }
-
-.card-body {
-  padding: 1rem;
-}
-
 </style>
