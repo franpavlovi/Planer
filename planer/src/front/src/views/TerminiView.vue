@@ -2,24 +2,36 @@
   <NavigacijaGlava/>
 
   <div class="dodaj-termin">
-    <v-btn flat size="large" rounded="0" class="termini-btn" @click="dodajterminview">DODAJ TERMIN</v-btn>
+    <v-btn flat size="large" rounded="0" class="termini-btn" @click="prikazi = true">DODAJ TERMIN</v-btn>
     <hr class="underline">
   </div>
 
+
+  <ModalDodajTermin v-if="prikazi" @close="zatvori" />
 
 </template>
 
 <script>
 import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
+import ModalDodajTermin from "@/components/ModalDodajTermin.vue";
 import router from '../router';
 
 
 export default {
-
   name:'App',
-  components:{NavigacijaGlava},
+  components:{NavigacijaGlava , ModalDodajTermin},
+
+  data(){
+    return{
+      prikazi: false,
+    }
+  },
 
   methods: {
+    zatvori() {
+      this.prikazi = false;
+    },
+
     dodajterminview(){
       router.push('/termini/dodaj')
     },

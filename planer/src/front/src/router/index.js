@@ -5,8 +5,6 @@ import RegistracijaView from '../views/RegistracijaView.vue'
 import NotFoundView from "../views/NotFoundView.vue";
 import TerminiView from "../views/TerminiView.vue";
 import ZadaciView from "../views/ZadaciView.vue"
-import DodajTerminView from "@/views/DodajTerminView.vue";
-import DodajZadatakView from "@/views/DodajZadatakView.vue";
 import StatistikaView from "@/views/StatistikaView.vue"
 
 const routes = [
@@ -44,16 +42,6 @@ const routes = [
     path:'/zadaci',
     name: 'zadaci',
     component: ZadaciView
-  },
-  {
-    path:'/termini/dodaj',
-    name:'dodajtermin',
-    component: DodajTerminView,
-  },
-  {
-    path:'/zadaci/dodaj',
-    name:'dodajzadatak',
-    component: DodajZadatakView
   },
   {
     path:'/statistika',

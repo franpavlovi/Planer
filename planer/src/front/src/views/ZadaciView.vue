@@ -3,9 +3,11 @@
     <NavigacijaGlava/>
 
     <div class="dodaj-zadatak">
-      <v-btn flat size="large" rounded="0" class="zadaci-btn" @click="dodajZadatakView">DODAJ ZADATAK</v-btn>
+      <v-btn flat size="large" rounded="0" class="zadaci-btn" @click="prikazi = true">DODAJ ZADATAK</v-btn>
       <hr class="underline">
     </div>
+
+    <ModalDodajZadatak v-if="prikazi" @close="zatvori" />
 
     <div class="lista-zadataka">
       <v-container>
@@ -33,15 +35,17 @@
 
 <script>
 import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
-import router from "@/router";
+import ModalDodajZadatak from "@/components/ModalDodajZadatak.vue";
 import axios from "axios";
 
 export default {
   name: 'App',
-  components: { NavigacijaGlava },
+  components: { NavigacijaGlava , ModalDodajZadatak},
 
   data() {
     return {
+      prikazi:false,
+
       zadaci: [],
       dani: [
         {index:0, naziv:'PONEDJELJAK'},
@@ -61,8 +65,9 @@ export default {
   },
 
   methods: {
-    dodajZadatakView() {
-      router.push('/zadaci/dodaj');
+
+    zatvori() {
+      this.prikazi = false;
     },
 
     dohvatiPocetakTjedna() {
@@ -96,7 +101,8 @@ export default {
           .catch(error => {
             console.error('Došlo je do greške pri dohvaćanju zadataka:', error);
           });
-    }
+    },
+
   }
 }
 </script>
