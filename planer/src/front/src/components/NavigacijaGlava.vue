@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-toolbar flat app>
-      <v-toolbar-title class="text-uppercase grey-text">
+      <v-toolbar-title class="text-uppercase grey-text" style="font-weight: bold;">
         <span>Planer</span>
       </v-toolbar-title>
 

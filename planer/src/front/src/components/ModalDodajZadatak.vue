@@ -33,6 +33,8 @@
     </div>
   </transition>
 
+  <v-calendar></v-calendar>
+
 </template>
 
 <script>
@@ -101,7 +103,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Tamna pozadina */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,11 +114,11 @@ export default {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  transition: all 0.3s ease; /* Animacija */
+  transition: all 0.3s ease;
   z-index: 10000;
 }
 
-/* CSS tranzicija za pojavljivanje/nestajanje modalne komponente */
+
 .modal-enter, .modal-leave-to {
   opacity: 0;
   transform: scale(0.8);

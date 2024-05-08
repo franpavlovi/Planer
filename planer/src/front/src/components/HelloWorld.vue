@@ -6,7 +6,7 @@
 export default {
   data(){
     return {
-      msg:"idemo jako"
+      msg:"Dobrodošli u Planer aplikaciju"
     }
   }
 }

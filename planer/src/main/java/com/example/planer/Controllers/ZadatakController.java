@@ -77,10 +77,9 @@ public class ZadatakController {
     }
 
     @GetMapping("/tjedan")
-    public ResponseEntity<Page<Zadatak>> getZadaciByWeek(@RequestParam LocalDate pocetakTjedna,
-                                                         Pageable pageable) {
+    public ResponseEntity<List<Zadatak>> getZadaciByWeek(@RequestParam LocalDate pocetakTjedna) {
 
-        Page<Zadatak> zadaci = zadatakService.getZadaciByWeek(pocetakTjedna, pageable);
+        List<Zadatak> zadaci = zadatakService.getZadaciByWeek(pocetakTjedna);
         return ResponseEntity.ok(zadaci);
     }
 

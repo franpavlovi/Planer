@@ -7,6 +7,8 @@
   </div>
 
 
+
+
   <ModalDodajTermin v-if="prikazi" @close="zatvori" />
 
 </template>
@@ -14,7 +16,6 @@
 <script>
 import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import ModalDodajTermin from "@/components/ModalDodajTermin.vue";
-import router from '../router';
 
 
 export default {
@@ -31,11 +32,6 @@ export default {
     zatvori() {
       this.prikazi = false;
     },
-
-    dodajterminview(){
-      router.push('/termini/dodaj')
-    },
-
   }
 }
 

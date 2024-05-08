@@ -14,8 +14,6 @@ import java.util.List;
 @Repository
 public interface ZadatakRepository extends JpaRepository<Zadatak, Long> {
 
-    Page<Zadatak> findByDtBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
-
     List<Zadatak> findByDtBetween(LocalDateTime start, LocalDateTime end);
 
     @Query(value = "SELECT * FROM zadatak z WHERE YEAR(z.dt) = :year AND MONTH(z.dt) = :month", nativeQuery = true)

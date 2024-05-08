@@ -16,7 +16,7 @@
           <v-col>
             <v-card>
               <v-card-item v-for="zadatak in zadaci" :key="zadatak.id">
-                Naziv zadatka:{{ zadatak.naziv }}
+                Naziv zadatka:{{ zadatak.naziv }} 
                 <br>
                 Opis zadatka: {{ zadatak.opis }}
                 <br>
@@ -47,6 +47,7 @@ export default {
       prikazi:false,
 
       zadaci: [],
+
       dani: [
         {index:0, naziv:'PONEDJELJAK'},
         {index:1, naziv:'UTORAK'},
@@ -88,7 +89,7 @@ export default {
 
     izlistajZadatke() {
 
-      this.dohvatiPocetakTjedna();
+
 
       axios.get('/api/zadaci/tjedan', {
         params: {
@@ -97,6 +98,8 @@ export default {
       })
           .then(response => {
             this.zadaci = response.data;
+
+            console.log('Podaci o zadacima:', this.zadaci);
           })
           .catch(error => {
             console.error('Došlo je do greške pri dohvaćanju zadataka:', error);

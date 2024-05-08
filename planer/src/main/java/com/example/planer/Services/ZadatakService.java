@@ -62,10 +62,10 @@ public class ZadatakService {
         return zadatakRepository.save(zadatak);
     }
 
-    public Page<Zadatak> getZadaciByWeek(LocalDate pocetakTjedna, Pageable pageable) {
+    public List<Zadatak> getZadaciByWeek(LocalDate pocetakTjedna) {
 
         LocalDate krajTjedna = pocetakTjedna.plusDays(6);
-        return zadatakRepository.findByDtBetween(pocetakTjedna.atStartOfDay(), krajTjedna.atTime(23, 59, 59), pageable);
+        return zadatakRepository.findByDtBetween(pocetakTjedna.atStartOfDay(), krajTjedna.atTime(23, 59, 59));
     }
 
     public double statistikaProduktivnosti(){
