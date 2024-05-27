@@ -11,18 +11,18 @@
 
     <div class="lista-zadataka">
       <v-container>
-        <v-row v-for="dan in dani" :key="dan.index">
-          <strong>{{ dan.naziv}}</strong>
+        <v-row v-for="dan in zadaciPoDanima" :key="dan.naziv">
+          <strong>{{ dan.naziv }}</strong>
           <v-col>
             <v-card>
-              <v-card-item v-for="zadatak in zadaci" :key="zadatak.id">
-                Naziv zadatka:{{ zadatak.naziv }} 
+              <v-card-item v-for="zadatak in dan.zadaci" :key="zadatak.id">
+                Naziv zadatka: {{ zadatak.naziv }}
                 <br>
                 Opis zadatka: {{ zadatak.opis }}
                 <br>
                 Status zadatka: {{ zadatak.status }}
                 <br>
-                Datum završetka: {{ zadatak.dt }}
+                Datum i vrijeme: {{ zadatak.dt }}
               </v-card-item>
             </v-card>
           </v-col>
@@ -44,20 +44,19 @@ export default {
 
   data() {
     return {
-      prikazi:false,
-
+      prikazi: false,
       zadaci: [],
-
+      zadaciPoDanima: [],
       dani: [
-        {index:0, naziv:'PONEDJELJAK'},
-        {index:1, naziv:'UTORAK'},
-        {index:2, naziv:'SRIJEDA'},
-        {index:3, naziv:'ČETVRTAK'},
-        {index:4, naziv:'PETAK'},
-        {index:5, naziv:'SUBOTA'},
-        {index:6, naziv:'NEDJELJA'}
+        { index: 0, naziv: 'PONEDJELJAK' },
+        { index: 1, naziv: 'UTORAK' },
+        { index: 2, naziv: 'SRIJEDA' },
+        { index: 3, naziv: 'ČETVRTAK' },
+        { index: 4, naziv: 'PETAK' },
+        { index: 5, naziv: 'SUBOTA' },
+        { index: 6, naziv: 'NEDJELJA' }
       ],
-    }
+    };
   },
 
   mounted() {
@@ -66,7 +65,6 @@ export default {
   },
 
   methods: {
-
     zatvori() {
       this.prikazi = false;
     },
@@ -74,7 +72,6 @@ export default {
     dohvatiPocetakTjedna() {
 
       const danas = new Date();
-
       const danUSedmici = danas.getDay();
       const daniProtekli = (7 + danUSedmici - 1) % 7;
 
@@ -82,14 +79,11 @@ export default {
       pocetakTjedna.setDate(danas.getDate() - daniProtekli);
 
       const pocetakTjednaFormatiran = pocetakTjedna.toISOString().split('T')[0];
-
-
       this.pocetakTjedna = pocetakTjednaFormatiran;
     },
 
     izlistajZadatke() {
-
-
+      this.dohvatiPocetakTjedna();
 
       axios.get('/api/zadaci/tjedan', {
         params: {
@@ -98,7 +92,7 @@ export default {
       })
           .then(response => {
             this.zadaci = response.data;
-
+            this.grupirajZadatkePoDanima();
             console.log('Podaci o zadacima:', this.zadaci);
           })
           .catch(error => {
@@ -106,6 +100,17 @@ export default {
           });
     },
 
+    grupirajZadatkePoDanima() {
+      this.zadaciPoDanima = this.dani.map(dan => {
+        return {
+          naziv: dan.naziv,
+          zadaci: this.zadaci.filter(zadatak => {
+            const datumZadatka = new Date(zadatak.dt).getDay();
+            return datumZadatka === dan.index;
+          })
+        };
+      });
+    }
   }
 }
 </script>
