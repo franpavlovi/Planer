@@ -15,6 +15,11 @@
           <strong>{{ dan.naziv }}</strong>
           <v-col>
             <v-card>
+              <div v-if="dan.zadaci.length === 0">
+
+                <strong> <i>NEMATE ZADATAKA ZA OVAJ DAN</i> </strong>
+
+              </div>
               <v-card-item v-for="zadatak in dan.zadaci" :key="zadatak.id">
                 Naziv zadatka: {{ zadatak.naziv }}
                 <br>
