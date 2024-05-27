@@ -12,12 +12,13 @@
     <div class="lista-zadataka">
       <v-container>
         <v-row v-for="dan in zadaciPoDanima" :key="dan.naziv">
-          <strong>{{ dan.naziv }}</strong>
           <v-col>
+            <strong>{{ dan.naziv }}</strong>
+            <v-spacer></v-spacer>
             <v-card>
               <div v-if="dan.zadaci.length === 0">
 
-                <strong> <i>NEMATE ZADATAKA ZA OVAJ DAN</i> </strong>
+                 NEMATE ZADATAKA ZA OVAJ DAN
 
               </div>
               <v-card-item v-for="zadatak in dan.zadaci" :key="zadatak.id">
@@ -27,9 +28,13 @@
                 <br>
                 Status zadatka: {{ zadatak.status }}
                 <br>
-                Datum i vrijeme: {{ zadatak.dt }}
               </v-card-item>
             </v-card>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
           </v-col>
         </v-row>
       </v-container>
