@@ -18,15 +18,17 @@
             <v-card>
               <div v-if="dan.zadaci.length === 0">
 
-                 NEMATE ZADATAKA ZA OVAJ DAN
+                 <p>NEMATE ZADATAKA ZA OVAJ DAN</p>
 
               </div>
               <v-card-item v-for="zadatak in dan.zadaci" :key="zadatak.id">
-                Naziv zadatka: {{ zadatak.naziv }}
+                <p>Naziv zadatka: {{ zadatak.naziv }}</p>
                 <br>
-                Opis zadatka: {{ zadatak.opis }}
+                <p>Opis zadatka: {{ zadatak.opis }}</p>
                 <br>
-                Status zadatka: {{ zadatak.status }}
+                <p> Status zadatka:
+                  <input type="checkbox" :checked="zadatak.status" @change="oznaci(zadatak.id, $event.target.checked)">
+                </p>
                 <br>
               </v-card-item>
             </v-card>
@@ -120,7 +122,24 @@ export default {
           })
         };
       });
+    },
+
+    oznaci(id, status) {
+      axios.patch(`/api/zadaci/status/${id}?obavljen=${status}`)
+          .then(response => {
+            this.zadaci = this.zadaci.map(zadatak => {
+              if (zadatak.id === id) {
+                zadatak.status = status;
+              }
+              return zadatak;
+            });
+            console.log('Status zadatka ažuriran:', response.data);
+          })
+          .catch(error => {
+            console.error('Došlo je do greške pri ažuriranju statusa zadatka:', error);
+          });
     }
+
   }
 }
 </script>
