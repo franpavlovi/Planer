@@ -8,8 +8,8 @@
     </div>
 
     <div class="navigacija-tjedan">
-      <v-btn @click="tjedanUnazad">Tjedan unazad</v-btn>
-      <v-btn @click="tjedanUnaprijed">Tjedan unaprijed</v-btn>
+      <v-btn class="zadaci-btn" @click="tjedanUnazad">Tjedan unazad</v-btn>
+      <v-btn class="zadaci-btn" @click="tjedanUnaprijed">Tjedan unaprijed</v-btn>
     </div>
 
     <ModalDodajZadatak v-if="prikazi" @close="zatvori" @zadatakKreiran="izlistajZadatke"/>
@@ -20,7 +20,7 @@
           <v-col>
             <strong>{{ dan.naziv }}</strong>
             <v-spacer></v-spacer>
-            <v-card>
+            <v-card class="custom-card">
               <div v-if="dan.zadaci.length === 0">
 
                  <p>NEMATE ZADATAKA ZA OVAJ DAN</p>
@@ -185,5 +185,10 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: 20px 30px;
+}
+
+.custom-card {
+  background-color: #f5f5f5 !important;
+  color: black !important;
 }
 </style>
