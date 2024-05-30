@@ -7,6 +7,11 @@
       <hr class="underline">
     </div>
 
+    <div class="navigacija-tjedan">
+      <v-btn @click="tjedanUnazad">Tjedan unazad</v-btn>
+      <v-btn @click="tjedanUnaprijed">Tjedan unaprijed</v-btn>
+    </div>
+
     <ModalDodajZadatak v-if="prikazi" @close="zatvori" @zadatakKreiran="izlistajZadatke"/>
 
     <div class="lista-zadataka">
@@ -82,21 +87,13 @@ export default {
     },
 
     dohvatiPocetakTjedna() {
-
       const danas = new Date();
-      const danUSedmici = danas.getDay();
-      const daniProtekli = (7 + danUSedmici - 1) % 7;
-
-      const pocetakTjedna = new Date(danas);
-      pocetakTjedna.setDate(danas.getDate() - daniProtekli);
-
-      const pocetakTjednaFormatiran = pocetakTjedna.toISOString().split('T')[0];
-      this.pocetakTjedna = pocetakTjednaFormatiran;
+      const danUSedmici = danas.getDay() === 0 ? 6 : danas.getDay() - 1;
+      const pocetakTjedna = new Date(danas.setDate(danas.getDate() - danUSedmici));
+      this.pocetakTjedna = pocetakTjedna.toISOString().split('T')[0];
     },
 
     izlistajZadatke() {
-      this.dohvatiPocetakTjedna();
-
       axios.get('/api/zadaci/tjedan', {
         params: {
           pocetakTjedna: this.pocetakTjedna
@@ -117,8 +114,9 @@ export default {
         return {
           naziv: dan.naziv,
           zadaci: this.zadaci.filter(zadatak => {
-            const datumZadatka = new Date(zadatak.dt).getDay();
-            return datumZadatka === dan.index;
+            const datumZadatka = new Date(zadatak.dt);
+            const danZadatka = datumZadatka.getDay() === 0 ? 6 : datumZadatka.getDay() - 1;
+            return danZadatka === dan.index;
           })
         };
       });
@@ -138,6 +136,20 @@ export default {
           .catch(error => {
             console.error('Došlo je do greške pri ažuriranju statusa zadatka:', error);
           });
+    },
+
+    tjedanUnazad() {
+      const pocetakTjedna = new Date(this.pocetakTjedna);
+      pocetakTjedna.setDate(pocetakTjedna.getDate() - 7);
+      this.pocetakTjedna = pocetakTjedna.toISOString().split('T')[0];
+      this.izlistajZadatke();
+    },
+
+    tjedanUnaprijed() {
+      const pocetakTjedna = new Date(this.pocetakTjedna);
+      pocetakTjedna.setDate(pocetakTjedna.getDate() + 7);
+      this.pocetakTjedna = pocetakTjedna.toISOString().split('T')[0];
+      this.izlistajZadatke();
     }
 
   }
@@ -167,5 +179,11 @@ export default {
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 50px;
+}
+
+.navigacija-tjedan {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 30px;
 }
 </style>
