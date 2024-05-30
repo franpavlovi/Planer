@@ -1,5 +1,5 @@
 <template>
-  <NavigacijaGlava/>
+
 
   <transition name="modal">
     <div class="modal-mask">
@@ -33,8 +33,6 @@
     </div>
   </transition>
 
-  <v-calendar></v-calendar>
-
 </template>
 
 <script>
@@ -62,6 +60,7 @@ export default {
           .then(response =>{
 
             alert("Uspjesno kreiran termin" + response.data)
+            this.$emit('zadatakKreiran');
             this.$emit('close');
           })
           .catch(error =>{

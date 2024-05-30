@@ -7,7 +7,7 @@
       <hr class="underline">
     </div>
 
-    <ModalDodajZadatak v-if="prikazi" @close="zatvori" />
+    <ModalDodajZadatak v-if="prikazi" @close="zatvori" @zadatakKreiran="izlistajZadatke"/>
 
     <div class="lista-zadataka">
       <v-container>
