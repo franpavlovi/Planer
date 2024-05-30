@@ -3,8 +3,6 @@ package com.example.planer.Controllers;
 import com.example.planer.Models.Zadatak;
 import com.example.planer.Services.ZadatakService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,11 +62,11 @@ public class ZadatakController {
         }
     }
 
-    @PutMapping("/status/{id}")
-    public ResponseEntity<Zadatak> setStatusZadatka(@PathVariable Long id, @RequestParam boolean obavljen, @RequestParam boolean neobavljen) {
+    @PatchMapping("/status/{id}")
+    public ResponseEntity<Zadatak> setStatusZadatka(@PathVariable Long id, @RequestParam("obavljen") boolean obavljen) {
         try {
-            Zadatak updatedZadatak = zadatakService.setStatusZadatka(id, obavljen, neobavljen);
-            return ResponseEntity.ok(updatedZadatak);
+            Zadatak updatedStatus = zadatakService.setStatusZadatka(id, obavljen);
+            return ResponseEntity.ok(updatedStatus);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
         } catch (EntityNotFoundException e) {

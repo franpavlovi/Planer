@@ -4,12 +4,9 @@ import com.example.planer.Models.Zadatak;
 import com.example.planer.Repositories.ZadatakRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,18 +43,12 @@ public class ZadatakService {
         return zadatakRepository.save(zadatak);
     }
 
-    public Zadatak setStatusZadatka(Long id , boolean obavljen , boolean neobavljen){
+    public Zadatak setStatusZadatka(Long id , boolean obavljen){
 
         Zadatak zadatak = zadatakRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Zadatak s ID-om " + id + " nije pronađen."));
 
-        if(obavljen && neobavljen){
-            throw new IllegalArgumentException("Nije moguće označiti oba checkbox-a.");
-        } else if (obavljen) {
-            zadatak.setStatus(true);
-        } else if (neobavljen) {
-            zadatak.setStatus(false);
-        }
+        zadatak.setStatus(obavljen);
 
         return zadatakRepository.save(zadatak);
     }
