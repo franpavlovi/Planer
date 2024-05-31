@@ -88,8 +88,8 @@ export default {
 
     dohvatiPocetakTjedna() {
       const danas = new Date();
-      const danUSedmici = danas.getDay() === 0 ? 6 : danas.getDay() - 1;
-      const pocetakTjedna = new Date(danas.setDate(danas.getDate() - danUSedmici));
+      const danUTjednu = danas.getDay() === 0 ? 6 : danas.getDay() - 1;
+      const pocetakTjedna = new Date(danas.setDate(danas.getDate() - danUTjednu));
       this.pocetakTjedna = pocetakTjedna.toISOString().split('T')[0];
     },
 
