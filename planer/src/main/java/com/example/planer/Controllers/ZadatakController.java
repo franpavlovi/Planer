@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/zadaci")
@@ -108,9 +110,6 @@ public class ZadatakController {
         double produktivnost = zadatakService.statistikaProduktivnostiPoGodini(year);
         return ResponseEntity.ok(produktivnost);
     }
-
-
-
 
 
 }

@@ -1,5 +1,8 @@
 <template>
+
 <v-app class="grey lighten-4">
+
+
 
   <router-view/>
 
@@ -10,6 +13,8 @@
 <script>
 
 export default {
+
+  name: 'App',
 
 }
 </script>
@@ -40,6 +45,7 @@ nav a.router-link-exact-active {
 
 }
 </style>
+
 <script setup>
 
 </script>
