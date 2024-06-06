@@ -6,21 +6,21 @@
     <hr class="underline">
   </div>
 
-
-
+  <div class="v-kalendar">
+    <v-calendar></v-calendar>
+  </div>
 
   <ModalDodajTermin v-if="prikazi" @close="zatvori" />
-
 </template>
 
 <script>
 import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import ModalDodajTermin from "@/components/ModalDodajTermin.vue";
-
+import { VCalendar } from 'vuetify/labs/VCalendar'
 
 export default {
-  name:'App',
-  components:{NavigacijaGlava , ModalDodajTermin},
+  name: 'TerminiView',
+  components: { NavigacijaGlava, ModalDodajTermin, VCalendar },
 
   data(){
     return{
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-.termini-btn{
+.termini-btn {
   background-color: #f5f5f5 !important;
   color: black !important;
   text-transform: uppercase;
@@ -53,5 +53,12 @@ export default {
 .underline {
   border: none;
   border-top: 1px solid black;
+}
+
+.v-kalendar {
+  height: 100px;
+  width: 1500px;
+  margin-left: 30px;
+  margin-top: 30px;
 }
 </style>
