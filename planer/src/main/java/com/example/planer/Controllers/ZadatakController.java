@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/zadaci")
@@ -83,32 +81,18 @@ public class ZadatakController {
         return ResponseEntity.ok(zadaci);
     }
 
-    @GetMapping("/produktivnost")
-    public ResponseEntity<Double> statistikaProduktivnsoti(){
+    @GetMapping("/mjesec")
+    public ResponseEntity<List<Zadatak>> getZadaciByMonth(@RequestParam int year, @RequestParam int month) {
 
-        double produktivnost = zadatakService.statistikaProduktivnosti();
-        return ResponseEntity.ok(produktivnost);
+        List<Zadatak> zadaci = zadatakService.getZadaciByMonth(year, month);
+        return ResponseEntity.ok(zadaci);
     }
 
-    @GetMapping("/produktivnost/tjedan")
-    public ResponseEntity<Double> statistikaProduktivnostiPoTjednu(@RequestParam LocalDate pocetakTjedna) {
+    @GetMapping("/godina")
+    public ResponseEntity<List<Zadatak>> getZadaciByYear(@RequestParam int year) {
 
-        double produktivnost = zadatakService.statistikaProduktivnostiPoTjednu(pocetakTjedna);
-        return ResponseEntity.ok(produktivnost);
-    }
-
-    @GetMapping("/produktivnost/mjesec")
-    public ResponseEntity<Double> statistikaProduktivnostiPoMjesecu(@RequestParam int year, @RequestParam int month) {
-
-        double produktivnost = zadatakService.statistikaProduktivnostiPoMjesecu(year, month);
-        return ResponseEntity.ok(produktivnost);
-    }
-
-    @GetMapping("/produktivnost/godina")
-    public ResponseEntity<Double> statistikaProduktivnostiPoGodini(@RequestParam int year) {
-
-        double produktivnost = zadatakService.statistikaProduktivnostiPoGodini(year);
-        return ResponseEntity.ok(produktivnost);
+        List<Zadatak> zadaci = zadatakService.getZadaciByYear(year);
+        return ResponseEntity.ok(zadaci);
     }
 
 

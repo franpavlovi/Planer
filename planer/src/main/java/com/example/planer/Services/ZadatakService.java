@@ -59,75 +59,14 @@ public class ZadatakService {
         return zadatakRepository.findByDtBetween(pocetakTjedna.atStartOfDay(), krajTjedna.atTime(23, 59, 59));
     }
 
-    public double statistikaProduktivnosti(){
+    public List<Zadatak> getZadaciByMonth(int year, int month) {
 
-        List<Zadatak> zadaci = zadatakRepository.findAll();
-
-        int brojObavljenih=0;
-        double produktivnost;
-
-        for(Zadatak zadatak : zadaci){
-
-            if(zadatak.isStatus()){
-                brojObavljenih++;
-            }
-
-        }
-
-        produktivnost = ((double)brojObavljenih/zadaci.size())*100;
-
-        return produktivnost;
+        return zadatakRepository.findByYearAndMonth(year, month);
     }
 
+    public List<Zadatak> getZadaciByYear(int year) {
 
-    public double statistikaProduktivnostiPoTjednu(LocalDate pocetakTjedna) {
-        LocalDate krajTjedna = pocetakTjedna.plusDays(6);
-        List<Zadatak> zadaciUTjednu = zadatakRepository.findByDtBetween(pocetakTjedna.atStartOfDay(), krajTjedna.atTime(23, 59, 59));
-        int brojObavljenih = 0;
-
-        for (Zadatak zadatak : zadaciUTjednu) {
-            if (zadatak.isStatus()) {
-                brojObavljenih++;
-            }
-        }
-
-        return (double) brojObavljenih / zadaciUTjednu.size() * 100;
-    }
-
-
-
-    public double statistikaProduktivnostiPoMjesecu(int year , int month) {
-        List<Zadatak> zadaci = zadatakRepository.findByYearAndMonth(year,month);
-        int brojObavljenih = 0;
-        double produktivnost;
-
-        for (Zadatak zadatak : zadaci) {
-            if (zadatak.isStatus()) {
-                brojObavljenih++;
-            }
-        }
-
-        produktivnost = ((double) brojObavljenih / zadaci.size()) * 100;
-
-        return produktivnost;
-    }
-
-
-
-    public double statistikaProduktivnostiPoGodini(int year) {
-        List<Zadatak> zadaci = zadatakRepository.findByYear(year);
-        int brojObavljenih = 0;
-        double produktivnost;
-
-        for (Zadatak zadatak : zadaci) {
-            if (zadatak.isStatus()) {
-                brojObavljenih++;
-            }
-        }
-
-        produktivnost = ((double) brojObavljenih / zadaci.size()) * 100;
-
-        return produktivnost;
+        return zadatakRepository.findByYear(year);
     }
 
 }
