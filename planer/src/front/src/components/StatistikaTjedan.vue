@@ -8,20 +8,15 @@
   <div class="navigacija-tjedan">
 
     <v-btn class="zadaci-btn" @click="tjedanUnazad">Prethodni tjedan</v-btn>
+    <div class="tekst">
+    <p>
+    Ovaj tjedan imali ste {{ obavljeniZadaci}} zadataka koje se obavili i {{neobavljeniZadaci}} koje niste obavili
+    što je u postotku {{postotak}}%.
+   </p>
+    </div>
     <v-btn class="zadaci-btn" @click="tjedanUnaprijed">Sljedeći tjedan</v-btn>
 
   </div>
-
-  <div class="produktivnost">
-
-    <h1>PRODUKTIVNOST</h1>
-    <p>
-      Ovaj tjedan imali ste {{ obavljeniZadaci}} zadataka koje se obavili i {{neobavljeniZadaci}} koje niste obavili
-      što je u postotku {{postotak}}.
-    </p>
-
-  </div>
-
 
 </template>
 
@@ -111,8 +106,14 @@ export default {
 
 .navigacija-tjedan {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 20px 30px;
+}
+
+.tekst {
+  flex: 1;
+  text-align: center;
+  margin: 0 10px;
 }
 
 .zadaci-btn {

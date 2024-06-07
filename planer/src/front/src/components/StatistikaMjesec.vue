@@ -5,16 +5,16 @@
 
   <div class="navigacija-mjesec">
     <v-btn class="zadaci-btn" @click="mjesecUnazad">Prethodni mjesec</v-btn>
-    <v-btn class="zadaci-btn" @click="mjesecUnaprijed">Sljedeći mjesec</v-btn>
-  </div>
+    <div class="tekst">
+      <p>
+        Ovaj mjesec imali ste {{ obavljeniZadaci }} zadataka koje ste obavili i {{ neobavljeniZadaci }} koje niste obavili,
+        što je u postotku {{ postotak }}%.
+      </p>
 
-  <div class="produktivnost">
-    <h1>PRODUKTIVNOST</h1>
-    <p>
-      Ovaj mjesec imali ste {{ obavljeniZadaci }} zadataka koje ste obavili i {{ neobavljeniZadaci }} koje niste obavili,
-      što je u postotku {{ postotak }}%.
-    </p>
-  </div>
+    </div>
+    <v-btn class="zadaci-btn" @click="mjesecUnaprijed">Sljedeći mjesec</v-btn>
+    </div>
+
 </template>
 
 <script>
@@ -109,8 +109,14 @@ export default {
 
 .navigacija-mjesec {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 20px 30px;
+}
+
+.tekst {
+  flex: 1;
+  text-align: center;
+  margin: 0 10px;
 }
 
 .zadaci-btn {

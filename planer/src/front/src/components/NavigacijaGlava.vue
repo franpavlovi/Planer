@@ -2,7 +2,7 @@
   <nav>
     <v-toolbar flat app>
       <v-toolbar-title class="text-uppercase grey-text" style="font-weight: bold;">
-        <span>Planer</span>
+        <span class="naslovnica">Planer</span>
       </v-toolbar-title>
 
       <v-btn flat color="black" @click="pushTermini">
@@ -44,5 +44,12 @@ export default {
 
 <style>
 
+.naslovnica {
+  text-transform: uppercase;
+  color: #333;
+  font-weight: bold;
+  font-size: 38px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
 
 </style>

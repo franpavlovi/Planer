@@ -5,16 +5,15 @@
 
   <div class="navigacija-godina">
     <v-btn class="zadaci-btn" @click="godinaUnazad">Prethodna godina</v-btn>
+    <div class="tekst">
+      <p>
+        Ove godine imali ste {{ obavljeniZadaci }} zadataka koje ste obavili i {{ neobavljeniZadaci }} koje niste obavili,
+        što je u postotku {{ postotak }}%.
+      </p>
+    </div>
     <v-btn class="zadaci-btn" @click="godinaUnaprijed">Sljedeća godina</v-btn>
   </div>
 
-  <div class="produktivnost">
-    <h1>PRODUKTIVNOST</h1>
-    <p>
-      Ove godine imali ste {{ obavljeniZadaci }} zadataka koje ste obavili i {{ neobavljeniZadaci }} koje niste obavili,
-      što je u postotku {{ postotak }}%.
-    </p>
-  </div>
 </template>
 
 <script>
@@ -103,8 +102,14 @@ export default {
 
 .navigacija-godina {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 20px 30px;
+}
+
+.tekst {
+  flex: 1;
+  text-align: center;
+  margin: 0 10px;
 }
 
 .zadaci-btn {

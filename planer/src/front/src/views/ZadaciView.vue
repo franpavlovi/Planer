@@ -18,7 +18,7 @@
       <v-container>
         <v-row v-for="dan in zadaciPoDanima" :key="dan.naziv">
           <v-col>
-            <strong>{{ dan.naziv }}</strong>
+            <strong class="dan-naziv">{{ dan.naziv }}</strong>
             <v-spacer></v-spacer>
             <v-card class="custom-card">
               <div v-if="dan.zadaci.length === 0">
@@ -27,11 +27,9 @@
 
               </div>
               <v-card-item v-for="zadatak in dan.zadaci" :key="zadatak.id">
-                <p>Naziv zadatka: {{ zadatak.naziv }}</p>
-                <br>
-                <p>Opis zadatka: {{ zadatak.opis }}</p>
-                <br>
-                <p> Status zadatka:
+                <p class="zadatak-naziv">Naziv: {{ zadatak.naziv }}</p>
+                <p class="zadatak-opis">Opis: {{ zadatak.opis }}</p>
+                <p class="zadatak-status"> Obavljen?
                   <input type="checkbox" :checked="zadatak.status" @change="oznaci(zadatak.id, $event.target.checked)">
                 </p>
                 <br>
@@ -190,5 +188,27 @@ export default {
 .custom-card {
   background-color: #f5f5f5 !important;
   color: black !important;
+}
+
+.lista-zadataka .dan-naziv {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #2c3e50;
+}
+
+.zadatak-naziv, .zadatak-opis, .zadatak-status {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  color: #34495e;
+  margin: 0;
+}
+
+.zadatak-naziv {
+  font-weight: bold;
+}
+
+.zadatak-status input[type="checkbox"] {
+  margin-left: 10px;
 }
 </style>

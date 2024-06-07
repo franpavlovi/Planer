@@ -8,7 +8,9 @@
 
   <div class="month-navigation">
     <v-btn class="termini-btn" @click="prevMonth">Prethodni mjesec</v-btn>
-    <span>{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+    <div class="tekst">
+    <span class="tekst">{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+    </div>
     <v-btn class="termini-btn" @click="nextMonth">Sljedeći mjesec</v-btn>
   </div>
 
@@ -40,7 +42,8 @@ export default {
       calendarDays: [],
       currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
-      monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+      monthNames: ["SIJEČANJ", "VELJAČA", "OŽUJAK", "TRAVANJ", "SVIBANJ", "LIPANJ", "SRPANJ", "KOLOVOZ", "RUJAN", "LISTOPAD", "STUDENI", "PROSINAC"]
+
     }
   },
 
@@ -138,6 +141,8 @@ export default {
   width: 1500px;
   height: 800px;
   margin: 20px auto;
+  border: 2px solid #999;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
 .day {
@@ -163,5 +168,15 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tekst {
+  flex: 1;
+  text-align: center;
+  margin: 0 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #2c3e50;
 }
 </style>
