@@ -18,20 +18,18 @@ public class Termin {
 
     private String naziv;
 
-    private String lokacija;
-
     private LocalDateTime pocetak;
 
     private LocalDateTime kraj;
 
+
     public Termin() {
     }
 
-    public Termin(Long id, LocalDate datum, String naziv, String lokacija, LocalDateTime pocetak, LocalDateTime kraj) {
+    public Termin(Long id, LocalDate datum, String naziv, LocalDateTime pocetak, LocalDateTime kraj) {
         this.id = id;
         this.datum = datum;
         this.naziv = naziv;
-        this.lokacija = lokacija;
         this.pocetak = pocetak;
         this.kraj = kraj;
     }
@@ -58,14 +56,6 @@ public class Termin {
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
-    }
-
-    public String getLokacija() {
-        return lokacija;
-    }
-
-    public void setLokacija(String lokacija) {
-        this.lokacija = lokacija;
     }
 
     public LocalDateTime getPocetak() {

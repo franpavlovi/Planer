@@ -1,58 +1,45 @@
 <template>
-
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-container">
+        <v-form @submit.prevent="kreirajTermin" class="obrub">
+          <v-container class="forma">
+            <v-container class="inputi">
+              <h1 class="text-left">DODAJ TERMIN</h1>
+              <v-divider class="v-divider"></v-divider>
 
-  <v-form @submit.prevent="kreirajTermin" class="obrub">
-    <v-container class="forma">
+              <p class="text-left">NAZIV</p>
+              <v-text-field v-model="termin.naziv" label="unesite naziv" variant="outlined"></v-text-field>
 
-      <v-container class="inputi">
+              <p class="text-left">DATUM</p>
+              <v-text-field v-model="termin.datum" label="unesite datum" variant="outlined" type="date"></v-text-field>
 
-        <h1 class="text-left">DODAJ TERMIN</h1>
-        <v-divider class="v-divider"></v-divider>
+              <p class="text-left">POCETAK</p>
+              <v-text-field v-model="termin.pocetak" label="unesite pocetak" variant="outlined" type="time"></v-text-field>
 
-        <p class="text-left">NAZIV</p>
-        <v-text-field v-model="termin.naziv" label="unesite naziv" variant="outlined"></v-text-field>
+              <p class="text-left">KRAJ</p>
+              <v-text-field v-model="termin.kraj" label="unesite kraj" variant="outlined" type="time"></v-text-field>
 
-        <p class="text-left">LOKACIJA</p>
-        <v-text-field v-model="termin.lokacija" label="unesite lokaciju" variant="outlined"></v-text-field>
-
-        <p class="text-left">DATUM</p>
-        <v-text-field v-model="termin.datum" label="unesite datum" variant="outlined" type="date"></v-text-field>
-
-        <p class="text-left">POCETAK</p>
-        <v-text-field v-model="termin.pocetak" label="unesite pocetak" variant="outlined" type="time"></v-text-field>
-
-        <p class="text-left">KRAJ</p>
-        <v-text-field v-model="termin.kraj" label="unesite kraj" variant="outlined" type="time"></v-text-field>
-
-
-        <v-btn size="x-large" class="mt-2" color="success" type="submit" block>DODAJ</v-btn>
-      </v-container>
-
-    </v-container>
-  </v-form>
-
+              <v-btn size="x-large" class="mt-2" color="success" type="submit" block>DODAJ</v-btn>
+            </v-container>
+          </v-container>
+        </v-form>
       </div>
     </div>
   </transition>
-
 </template>
-
 
 <script>
 import axios from 'axios';
 
 export default {
-  name:'App',
+  name: 'ModalDodajTermin',
 
   data() {
     return {
       termin: {
         datum: '',
         naziv: '',
-        lokacija: '',
         pocetak: '',
         kraj: ''
       }
@@ -61,7 +48,6 @@ export default {
 
   methods: {
     kreirajTermin() {
-
       let pocetakISOformat = this.termin.datum + 'T' + this.termin.pocetak + ':00';
       let krajISOformat = this.termin.datum + 'T' + this.termin.kraj + ':00';
 
@@ -70,11 +56,12 @@ export default {
 
       axios.post('/api/termini/dodaj', this.termin)
           .then(response => {
-            alert("Uspjesno kreiran termin" + response.data);
+            alert("Uspješno kreiran termin" + response.data);
             this.$emit('close');
+            this.$emit('termin-created');
           })
           .catch(error => {
-            alert("Greska" + error.response.data);
+            alert("Greška" + error.response.data);
           });
     }
   }
@@ -82,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-.obrub{
+.obrub {
   border: 2px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -144,7 +131,6 @@ export default {
   transition: all 0.3s ease;
 }
 
-
 .modal-enter, .modal-leave-to {
   opacity: 0;
   transform: scale(0.8);
@@ -154,5 +140,3 @@ export default {
   transform: scale(1);
 }
 </style>
-
-

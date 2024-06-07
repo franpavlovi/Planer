@@ -6,35 +6,104 @@
     <hr class="underline">
   </div>
 
-  <div class="v-kalendar">
-    <v-calendar></v-calendar>
+  <div class="month-navigation">
+    <v-btn class="termini-btn" @click="prevMonth">Prethodni mjesec</v-btn>
+    <span>{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+    <v-btn class="termini-btn" @click="nextMonth">Sljedeći mjesec</v-btn>
   </div>
 
-  <ModalDodajTermin v-if="prikazi" @close="zatvori" />
+  <div class="v-kalendar" id="calendar">
+    <div v-for="day in daysInCurrentMonth" :key="day.date" class="day">
+      <span class="date">{{ day.date }}</span>
+      <div v-for="event in day.events" :key="event.name" class="event">
+        {{ event.name }}
+      </div>
+    </div>
+  </div>
+
+  <ModalDodajTermin v-if="prikazi" @close="zatvori" @termin-created="fetchEvents"/>
 </template>
 
 <script>
 import NavigacijaGlava from '@/components/NavigacijaGlava.vue'
 import ModalDodajTermin from "@/components/ModalDodajTermin.vue";
-import { VCalendar } from 'vuetify/labs/VCalendar'
+import axios from 'axios';
 
 export default {
   name: 'TerminiView',
-  components: { NavigacijaGlava, ModalDodajTermin, VCalendar },
+  components: { NavigacijaGlava, ModalDodajTermin },
 
-  data(){
-    return{
+  data() {
+    return {
       prikazi: false,
+      events: [],
+      calendarDays: [],
+      currentMonth: new Date().getMonth(),
+      currentYear: new Date().getFullYear(),
+      monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     }
+  },
+
+  computed: {
+    daysInCurrentMonth() {
+      const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+      const startDay = new Date(this.currentYear, this.currentMonth, 1).getDay();
+      const days = [];
+
+      for (let i = 0; i < daysInMonth + startDay; i++) {
+        if (i >= startDay) {
+          const date = i - startDay + 1;
+          const dayEvents = this.events.filter(event => {
+            const eventDate = new Date(event.start);
+            return eventDate.getFullYear() === this.currentYear && eventDate.getMonth() === this.currentMonth && eventDate.getDate() === date;
+          });
+          days.push({ date, events: dayEvents });
+        } else {
+          days.push({ date: '', events: [] });
+        }
+      }
+      return days;
+    }
+  },
+
+  mounted() {
+    this.fetchEvents();
   },
 
   methods: {
     zatvori() {
       this.prikazi = false;
     },
+    async fetchEvents() {
+      try {
+        const response = await axios.get('/api/termini');
+        this.events = response.data.map(termin => ({
+          name: termin.naziv,
+          start: new Date(termin.pocetak),
+          end: new Date(termin.kraj)
+        }));
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    },
+    prevMonth() {
+      if (this.currentMonth === 0) {
+        this.currentMonth = 11;
+        this.currentYear--;
+      } else {
+        this.currentMonth--;
+      }
+    },
+    nextMonth() {
+      if (this.currentMonth === 11) {
+        this.currentMonth = 0;
+        this.currentYear++;
+      } else {
+        this.currentMonth++;
+      }
+    }
   }
 }
-
 </script>
 
 <style scoped>
@@ -55,10 +124,44 @@ export default {
   border-top: 1px solid black;
 }
 
+.month-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 30px;
+}
+
 .v-kalendar {
-  height: 100px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  background-color: #ddd;
   width: 1500px;
-  margin-left: 30px;
-  margin-top: 30px;
+  height: 800px;
+  margin: 20px auto;
+}
+
+.day {
+  background-color: #f9f9f9;
+  padding: 10px;
+  text-align: right;
+  position: relative;
+  min-height: 120px;
+}
+
+.day .date {
+  font-size: 1em;
+  color: #888;
+}
+
+.event {
+  background-color: #87ceeb;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  margin: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

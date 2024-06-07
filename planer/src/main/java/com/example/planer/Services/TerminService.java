@@ -62,7 +62,7 @@ public class TerminService {
         termin.setDatum(noviTermin.getDatum());
         termin.setKraj(noviTermin.getKraj());
         termin.setNaziv(noviTermin.getNaziv());
-        termin.setLokacija(noviTermin.getLokacija());
+
 
         return terminRepository.save(termin);
     }
