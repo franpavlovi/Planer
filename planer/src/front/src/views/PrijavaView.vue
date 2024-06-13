@@ -7,13 +7,13 @@
             <div class="form-container">
               <h1 class="text-center">Prijava</h1>
               <form @submit.prevent="prijava" class="login-form">
-                <!-- Email -->
+
                 <div class="form-group">
                   <label for="email">Email</label>
                   <input id="email" v-model="korisnik.email" type="email" placeholder="Unesite email" required>
                 </div>
 
-                <!-- Lozinka -->
+
                 <div class="form-group">
                   <label for="password">Lozinka</label>
                   <input id="password" v-model="korisnik.lozinka" type="password" placeholder="Unesite lozinku" required>
@@ -38,6 +38,8 @@ import axios from 'axios';
 import router from '../router';
 
 export default {
+  name:'PrijavaView',
+
   data() {
     return {
       korisnik: {

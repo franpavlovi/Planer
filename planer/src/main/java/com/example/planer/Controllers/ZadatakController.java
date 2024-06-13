@@ -1,10 +1,14 @@
 package com.example.planer.Controllers;
 
+import com.example.planer.Models.KorisnikDetails;
 import com.example.planer.Models.Zadatak;
 import com.example.planer.Services.ZadatakService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -37,8 +41,10 @@ public class ZadatakController {
 
     @PostMapping("/dodaj")
     public ResponseEntity<Zadatak> createZadatak(@RequestBody Zadatak zadatak){
-
+        KorisnikDetails userDetails = (KorisnikDetails)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//debug
         try {
+            zadatak.setKorisnik(userDetails.getUser());
             Zadatak createdZadatak= zadatakService.createZadatak(zadatak);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdZadatak);
         } catch (IllegalArgumentException e) {
