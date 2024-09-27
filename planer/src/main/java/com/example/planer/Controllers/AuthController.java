@@ -1,7 +1,6 @@
 package com.example.planer.Controllers;
 
 
-import com.example.planer.Config.JwtUtil;
 import com.example.planer.Models.Korisnik;
 import com.example.planer.Services.KorisnikDetailsService;
 import com.example.planer.Services.KorisnikService;
@@ -18,15 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private KorisnikDetailsService korisnikDetailsService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
     private KorisnikService korisnikService;
 
     @PostMapping("/registracija")
@@ -40,30 +30,15 @@ public class AuthController {
     }
 
     @PostMapping("/prijava")
-    public ResponseEntity<?> loginKorisnika(@RequestBody Korisnik korisnik) {
+    public ResponseEntity<String> loginKorisnika(@RequestBody Korisnik korisnik) {
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(korisnik.getEmail(), korisnik.getLozinka())
-            );
 
-            final UserDetails korisnikDetails = korisnikDetailsService.loadUserByUsername(korisnik.getEmail());
-            final String jwt = jwtUtil.generateToken(korisnikDetails);
+            korisnikService.loginKorisnik(korisnik.getEmail(), korisnik.getLozinka());
+            return new ResponseEntity<>("Prijava uspješna", HttpStatus.OK);
 
-            return ResponseEntity.ok(new AuthResponse(jwt));
         } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
 
-    private static class AuthResponse {
-        private final String jwt;
-
-        public AuthResponse(String jwt) {
-            this.jwt = jwt;
-        }
-
-        public String getJwt() {
-            return jwt;
-        }
-    }
 }

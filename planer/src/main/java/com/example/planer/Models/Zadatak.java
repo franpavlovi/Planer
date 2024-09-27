@@ -25,19 +25,16 @@ public class Zadatak {
     @NotNull(message = "Polje datum i vrijeme je obavezno.")
     private LocalDateTime dt;
 
-    @ManyToOne
-    @JoinColumn(name = "korisnik_id")
-    private Korisnik korisnik;
+
 
     public Zadatak() {
     }
 
-    public Zadatak(Long id, String naziv, String opis, LocalDateTime dt, Korisnik korisnik) {
+    public Zadatak(Long id, String naziv, String opis, LocalDateTime dt) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
         this.dt = dt;
-        this.korisnik = korisnik;
     }
 
     public Long getId() {
@@ -80,11 +77,4 @@ public class Zadatak {
         this.dt = dt;
     }
 
-    public Korisnik getKorisnik() {
-        return korisnik;
-    }
-
-    public void setKorisnik(Korisnik korisnik) {
-        this.korisnik = korisnik;
-    }
 }

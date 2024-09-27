@@ -75,7 +75,7 @@ export default {
 
 .container {
   width: 90%;
-  max-width: 400px; /* Adjusted max width for login */
+  max-width: 400px;
   margin: auto;
 }
 

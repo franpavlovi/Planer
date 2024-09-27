@@ -3,7 +3,6 @@
     <div class="container">
       <div class="card">
         <div class="card-body">
-          <!-- Forma -->
           <div class="form-container">
             <h1 class="text-center">Registracija</h1>
             <form @submit.prevent="registracija" class="registration-form">

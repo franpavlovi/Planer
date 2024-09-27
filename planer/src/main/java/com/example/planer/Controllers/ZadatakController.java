@@ -41,10 +41,9 @@ public class ZadatakController {
 
     @PostMapping("/dodaj")
     public ResponseEntity<Zadatak> createZadatak(@RequestBody Zadatak zadatak){
-        KorisnikDetails userDetails = (KorisnikDetails)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//debug
+
         try {
-            zadatak.setKorisnik(userDetails.getUser());
+
             Zadatak createdZadatak= zadatakService.createZadatak(zadatak);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdZadatak);
         } catch (IllegalArgumentException e) {
