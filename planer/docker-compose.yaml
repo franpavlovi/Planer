@@ -7,7 +7,7 @@ services:
     environment:
       - MYSQL_HOST=mysql
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/planer
-      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=lozinka
     ports:
       - 80:8080
@@ -28,7 +28,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=lozinka
       - MYSQL_DATABASE=planer
-      - MYSQL_USER=user
+      - MYSQL_USER=root
       - MYSQL_PASSWORD=lozinka
     volumes:
       - mysql-data:/var/lib/mysql
