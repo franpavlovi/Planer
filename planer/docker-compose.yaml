@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  planer-app:
+  planer:
     build: .
     container_name: planer
     image: planer:latest
