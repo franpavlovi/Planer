@@ -25,6 +25,10 @@ public class Zadatak {
     @NotNull(message = "Polje datum i vrijeme je obavezno.")
     private LocalDateTime dt;
 
+    @ManyToOne
+    @JoinColumn(name = "korisnik_id", nullable = false)
+    private Korisnik korisnik;
+
 
 
     public Zadatak() {
@@ -75,6 +79,14 @@ public class Zadatak {
 
     public void setDt(LocalDateTime dt) {
         this.dt = dt;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 
 }

@@ -36,6 +36,12 @@ public class Korisnik {
     @Enumerated(EnumType.STRING)
     Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "korisnik", cascade = CascadeType.ALL)
+    private Set<Termin> termin = new HashSet<>();
+
+    @OneToMany(mappedBy = "korisnik", cascade = CascadeType.ALL)
+    private Set<Zadatak> zadatak = new HashSet<>();
+
 
     public Korisnik(){
     }
@@ -122,6 +128,22 @@ public class Korisnik {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Termin> getTermini() {
+        return termin;
+    }
+
+    public void setTermini(Set<Termin> termini) {
+        this.termin = termini;
+    }
+
+    public Set<Zadatak> getZadaci() {
+        return zadatak;
+    }
+
+    public void setZadaci(Set<Zadatak> zadaci) {
+        this.zadatak = zadaci;
     }
 
 }

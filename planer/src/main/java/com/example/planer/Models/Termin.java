@@ -1,8 +1,6 @@
 package com.example.planer.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +19,10 @@ public class Termin {
     private LocalDateTime pocetak;
 
     private LocalDateTime kraj;
+
+    @ManyToOne
+    @JoinColumn(name = "korisnik_id", nullable = false)
+    private Korisnik korisnik;
 
 
     public Termin() {
@@ -72,5 +74,13 @@ public class Termin {
 
     public void setKraj(LocalDateTime kraj) {
         this.kraj = kraj;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 }
